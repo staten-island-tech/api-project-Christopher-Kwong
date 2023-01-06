@@ -17,12 +17,17 @@ async function getData(URL) {
   try {
     const data = await (await fetch(URL)).json();
     console.log(data.rates);
-    data.forEach((element) => {
-      document.getElementById("app").textContent = element.rates;
-    });
+    document.getElementById("app").textContent = data.rates.AED;
+    document.getElementById("app").textContent = data.forEach(
+      (element) => element.rates
+    );
   } catch (error) {
     console.log("error");
   }
 }
 
 getData(URL);
+
+const data = await (await fetch(URL)).json();
+console.log(data);
+data.forEach((element) => console.log(element.rates));
