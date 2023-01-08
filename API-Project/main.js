@@ -1,33 +1,54 @@
-/* const URL = "https://api.quotable.io/random";
-
-async function getData(URL) {
-  try {
-    const data = await (await fetch(URL)).json();
-    console.log(data.content);
-    document.getElementById("app").textContent = data.content;
-  } catch (error) {}
-}
-
-getData(URL);
- */
-
 const URL = "https://api.exchangerate.host/latest";
 
-async function getData(URL) {
-  try {
-    const data = await (await fetch(URL)).json();
-    console.log(data.rates);
-    document.getElementById("app").textContent = data.rates.AED;
-    document.getElementById("app").textContent = data.forEach(
-      (element) => element.rates
-    );
-  } catch (error) {
-    console.log("error");
-  }
+async function createDropDown(URL, ID) {
+  let data = await (await fetch(URL)).json();
+  Object.keys(data.rates).forEach((element) =>
+    document
+      .querySelector(ID)
+      .insertAdjacentHTML(
+        "beforeend",
+        `<option class="${element}">${element}</option>`
+      )
+  );
 }
 
-getData(URL);
+createDropDown(URL, ".dropDownBase");
+createDropDown(URL, ".dropDownConverted");
 
-const data = await (await fetch(URL)).json();
-console.log(data);
-data.forEach((element) => console.log(element.rates));
+async function getData(URL, input1, type) {
+  let data = await (await fetch(URL)).json();
+  let baseRate = document.querySelector(".dropDownBase").value;
+  document
+    .getElementById("output")
+    .insertAdjacentHTML(
+      "beforeend",
+      `<p>${input1} ${type} = ${Number.parseFloat(
+        (input1 / data.rates[baseRate]) * data.rates[type]
+      ).toFixed(2)} ${type}</p>`
+    );
+}
+
+function Clear() {
+  document.getElementById("textInput").value = "";
+  document.querySelector(".dropDownBase").value = "Base Currency";
+  document.querySelector(".dropDownConverted").value = "Converted Currency";
+}
+
+document.getElementById("form").addEventListener("submit", function (event) {
+  event.preventDefault();
+  let test = document.querySelector(".textInput").value;
+  let secondTest = document.querySelector(".dropDownConverted").value;
+  if (secondTest == "Converted Currency") {
+    alert("Requires Currency Type");
+  } else {
+    getData(URL, test, secondTest);
+    // Clear();
+  }
+});
+
+/*   console.log(Object.entries(data.rates));
+  Object.entries(data.rates).forEach(([currencycode, conversion]) => {
+    document
+      .getElementById("app")
+      .insertAdjacentHTML("beforeend", `<p>${currencycode}: ${conversion}</p>`);
+  });  */
