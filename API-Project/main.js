@@ -1,5 +1,11 @@
 const URL = "https://api.exchangerate.host/latest";
 
+const DOM = {
+  textInput: document.querySelector(".textInput").value,
+  dropDownBase: document.querySelector(".dropDownBase").value,
+  dropDownConverted: document.querySelector(".dropDownConverted").value,
+};
+
 async function createDropDown(URL, ID) {
   let data = await (await fetch(URL)).json();
   Object.keys(data.rates).forEach((element) =>
@@ -22,19 +28,19 @@ async function getData(URL, input1, type) {
     .getElementById("output")
     .insertAdjacentHTML(
       "beforeend",
-      `<p>${input1} ${type} = ${Number.parseFloat(
+      `<p>${input1} ${baseRate} = ${Number.parseFloat(
         (input1 / data.rates[baseRate]) * data.rates[type]
       ).toFixed(2)} ${type}</p>`
     );
 }
 
-function Clear() {
-  document.getElementById("textInput").value = "";
-  document.querySelector(".dropDownBase").value = "Base Currency";
-  document.querySelector(".dropDownConverted").value = "Converted Currency";
+function Clear(first, second, third) {
+  first = "";
+  second = "Base Currency";
+  third = "Converted Currency";
 }
 
-document.getElementById("form").addEventListener("submit", function (event) {
+document.getElementById("form").addEventListener("submit", (event) => {
   event.preventDefault();
   let test = document.querySelector(".textInput").value;
   let secondTest = document.querySelector(".dropDownConverted").value;
@@ -42,7 +48,7 @@ document.getElementById("form").addEventListener("submit", function (event) {
     alert("Requires Currency Type");
   } else {
     getData(URL, test, secondTest);
-    // Clear();
+    Clear(DOM.textInput, DOM.dropDownBase, DOM.dropDownConverted);
   }
 });
 
