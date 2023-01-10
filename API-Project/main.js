@@ -19,30 +19,31 @@ async function getData(URL, input1, type) {
   let data = await (await fetch(URL)).json();
   let baseRate = document.querySelector(".dropDownBase").value;
   document
-    .getElementById("output")
+    .querySelector("#output")
     .insertAdjacentHTML(
       "beforeend",
-      `<p>${input1} ${type} = ${Number.parseFloat(
+      `<p>${input1} ${baseRate} = ${Number.parseFloat(
         (input1 / data.rates[baseRate]) * data.rates[type]
       ).toFixed(2)} ${type}</p>`
     );
 }
 
 function Clear() {
-  document.getElementById("textInput").value = "";
-  document.querySelector(".dropDownBase").value = "Base Currency";
+  document.querySelector(".textInput").value = "";
+  // document.querySelector(".dropDownBase").value = "Base Currency";
   document.querySelector(".dropDownConverted").value = "Converted Currency";
 }
 
-document.getElementById("form").addEventListener("submit", function (event) {
+document.querySelector("#form").addEventListener("submit", (event) => {
   event.preventDefault();
   let test = document.querySelector(".textInput").value;
   let secondTest = document.querySelector(".dropDownConverted").value;
-  if (secondTest == "Converted Currency") {
+  let thirdTest = document.querySelector(".dropDownBase").value;
+  if (thirdTest == "Base Currency" || secondTest == "Converted Currency") {
     alert("Requires Currency Type");
   } else {
     getData(URL, test, secondTest);
-    // Clear();
+    Clear();
   }
 });
 
