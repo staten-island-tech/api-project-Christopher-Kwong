@@ -1,0 +1,16 @@
+#main {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#form {
+    border: black solid 0.2rem;
+    width: 60%;
+}
+
+#output {
+    border: black solid 0.2rem;
+    width: 30%;
+}
