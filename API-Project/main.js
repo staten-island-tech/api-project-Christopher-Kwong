@@ -15,34 +15,36 @@ async function createDropDown(URL, ID) {
 createDropDown(URL, ".dropDownBase");
 createDropDown(URL, ".dropDownConverted");
 
-async function getData(URL, input1, type) {
+async function getData(URL, inputValue, baseCurrency, toBeConverted) {
   let data = await (await fetch(URL)).json();
-  let baseRate = document.querySelector(".dropDownBase").value;
   document
     .querySelector("#output")
     .insertAdjacentHTML(
       "beforeend",
-      `<p>${input1} ${baseRate} = ${Number.parseFloat(
-        (input1 / data.rates[baseRate]) * data.rates[type]
-      ).toFixed(2)} ${type}</p>`
+      `<p>${inputValue} ${baseCurrency} = ${Number.parseFloat(
+        (inputValue / data.rates[baseCurrency]) * data.rates[toBeConverted]
+      ).toFixed(2)} ${toBeConverted}</p>`
     );
 }
 
 function Clear() {
   document.querySelector(".textInput").value = "";
-  // document.querySelector(".dropDownBase").value = "Base Currency";
+  document.querySelector(".dropDownBase").value = "Base Currency";
   document.querySelector(".dropDownConverted").value = "Converted Currency";
 }
 
 document.querySelector("#form").addEventListener("submit", (event) => {
   event.preventDefault();
-  let test = document.querySelector(".textInput").value;
-  let secondTest = document.querySelector(".dropDownConverted").value;
-  let thirdTest = document.querySelector(".dropDownBase").value;
-  if (thirdTest == "Base Currency" || secondTest == "Converted Currency") {
+  let inputValue = document.querySelector(".textInput").value;
+  let toBeConverted = document.querySelector(".dropDownConverted").value;
+  let baseCurrency = document.querySelector(".dropDownBase").value;
+  if (
+    baseCurrency == "Base Currency" ||
+    toBeConverted == "Converted Currency"
+  ) {
     alert("Requires Currency Type");
   } else {
-    getData(URL, test, secondTest);
+    getData(URL, inputValue, baseCurrency, toBeConverted);
     Clear();
   }
 });
