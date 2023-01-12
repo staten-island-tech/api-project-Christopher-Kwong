@@ -29,7 +29,7 @@ async function getData(
 ) {
   HTML.insertAdjacentHTML(
     "beforeend",
-    `<p>${inputValue} ${baseCurrency} = ${Number.parseFloat(
+    `<p class="log">${inputValue} ${baseCurrency} = ${Number.parseFloat(
       (inputValue / arrayElement[baseCurrency]) * arrayElement[toBeConverted]
     ).toFixed(2)} ${toBeConverted}</p>`
   );

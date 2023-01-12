@@ -7,8 +7,8 @@
     <title>Vite App</title>
   </head>
   <body>
-    <div id="main">
       <form id="form">
+        <div id="interactions">
           <input class="textInput" type="text" placeholder="Amount" required>
           <select class="dropDownBase">
             <option class="defaultOption">Base Currency</option>
@@ -17,9 +17,12 @@
             <option class="defaultOption">Converted Currency</option>
           </select>
           <button id="valueButton" type="submit">Click</button>
+        </div>
       </form>
-      <div id="output"></div>
-    </div>
+      <div id="outputBox">
+        <strong>History Log<strong>
+        <div id="output"></div>
+      </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
