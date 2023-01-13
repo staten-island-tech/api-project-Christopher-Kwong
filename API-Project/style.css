@@ -1,24 +1,29 @@
 @import url('https://fonts.cdnfonts.com/css/cash-currency');
-/* font-family: 'Cash Currency', sans-serif;
-@import url('https://fonts.cdnfonts.com/css/money-money'); 
-/* font-family: 'Money Money', sans-serif */
+/* font-family: 'Cash Currency', sans-serif; */
+@import url('https://fonts.cdnfonts.com/css/crevice-stencil');
+/* font-family: 'Crevice Stencil', sans-serif; */
 
 #interactions {
     text-align: center;
     margin-top: 2rem;
 }   
 
+button, input, select {
+    font-size: 2rem;
+}
+
 #outputBox {
     text-align: center;
     width: 60%;
     border: black solid 0.2rem;
     font-size: 2rem;
-    margin-top: 2rem;
-    font-family: 'Cash Currency', sans-serif;
-                                                
+    margin: 2rem auto;
+    font-family: 'Cash Currency', sans-serif;                                                
 }
 
 #output {
     font-size: 1rem;
-    font-family: 'Money Money', sans-serif
+    font-family: 'Crevice Stencil';
+    height: 10rem;
+    overflow: scroll;
 }

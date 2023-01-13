@@ -55,7 +55,7 @@ document.querySelector("#form").addEventListener("submit", (event) => {
     alert("Requires Currency Type");
   } else {
     getData(DOM.output, data.rates, inputValue, baseCurrency, toBeConverted);
-    Clear("", "Base Currency", "Converted Currency");
+    Clear("", "Converted Currency", "Base Currency");
   }
 });
 
