@@ -59,9 +59,11 @@ document.querySelector("#form").addEventListener("submit", (event) => {
   }
 });
 
-/*   console.log(Object.entries(data.rates));
-  Object.entries(data.rates).forEach(([currencycode, conversion]) => {
-    document
-      .getElementById("app")
-      .insertAdjacentHTML("beforeend", `<p>${currencycode}: ${conversion}</p>`);
-  });  */
+let dataValues = Object.values(data.rates);
+console.log(data.rates);
+// dataValues.sort((a, b) => a - b);
+
+console.log(Object.entries(data.rates));
+let entries = Object.entries(data.rates);
+
+console.log(`${dataValues.sort((a, b) => a - b)}`);
