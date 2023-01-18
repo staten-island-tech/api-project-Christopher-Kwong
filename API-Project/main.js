@@ -59,11 +59,29 @@ document.querySelector("#form").addEventListener("submit", (event) => {
   }
 });
 
-let dataValues = Object.values(data.rates);
-console.log(data.rates);
-// dataValues.sort((a, b) => a - b);
-
-console.log(Object.entries(data.rates));
 let entries = Object.entries(data.rates);
+let values = Object.values(data.rates);
 
-console.log(`${dataValues.sort((a, b) => a - b)}`);
+/* entries.forEach((element) => console.log(`${element[0]}: ${element[1]}`)); */
+
+/* entries.forEach((element) => console.log(`${element[0]}: ${element[1]}`)); */
+/*   .sort((a, b) => a - b); */
+
+/* entries.forEach((element) =>
+  document
+    .getElementById("app")
+    .insertAdjacentHTML("beforeend", `<p>${element[0]}: ${element[1]}</p>`)
+); */
+
+/* console.log(entries.forEach((element) => element[0])); */
+
+console.log(entries.sort((a, b) => a - b));
+
+// Sort the array
+// Display lowest/highest rates with code
+
+/* entries.forEach(([currencycode, conversion]) => {
+  console.log(`${currencycode}: ${conversion}`);
+}); */
+
+/* console.log(`${dataValues.sort((a, b) => a - b)}`); */
