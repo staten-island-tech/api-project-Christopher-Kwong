@@ -25,5 +25,20 @@ button, input, select {
     font-size: 1rem;
     font-family: 'Crevice Stencil';
     height: 10rem;
-    overflow: scroll;
+    overflow-y: scroll;
+}
+
+#rankings {
+    margin: 2rem auto;
+    text-align: center; 
+    height: 55rem;
+    width: 40rem;
+    overflow-y: scroll;
+}
+
+.bigBox {
+    display: flex;
+    flex-wrap: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }

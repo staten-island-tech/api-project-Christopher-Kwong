@@ -67,21 +67,17 @@ let values = Object.values(data.rates);
 /* entries.forEach((element) => console.log(`${element[0]}: ${element[1]}`)); */
 /*   .sort((a, b) => a - b); */
 
-/* entries.forEach((element) =>
-  document
-    .getElementById("app")
-    .insertAdjacentHTML("beforeend", `<p>${element[0]}: ${element[1]}</p>`)
-); */
+/* entries
+  .sort((a, b) => a[1] - b[1])
+  .forEach((element) => console.log(`${element[0]}: ${element[1]}`)); */
 
-/* console.log(entries.forEach((element) => element[0])); */
+entries
+  .sort((a, b) => a[1] - b[1])
+  .forEach((element) =>
+    document
+      .getElementById("rankings")
+      .insertAdjacentHTML("beforeend", `<p>${element[0]}</p>`)
+  );
 
-console.log(entries.sort((a, b) => a - b));
-
-// Sort the array
-// Display lowest/highest rates with code
-
-/* entries.forEach(([currencycode, conversion]) => {
-  console.log(`${currencycode}: ${conversion}`);
-}); */
-
+testing();
 /* console.log(`${dataValues.sort((a, b) => a - b)}`); */
