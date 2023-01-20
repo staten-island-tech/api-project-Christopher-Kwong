@@ -9,15 +9,14 @@
 }   
 
 button, input, select {
-    font-size: 2rem;
+    font-size: 1rem;
 }
 
 #outputBox {
     text-align: center;
-    width: 60%;
     border: black solid 0.2rem;
     font-size: 2rem;
-    margin: 2rem auto;
+    margin: 2rem;
     font-family: 'Cash Currency', sans-serif;                                                
 }
 
@@ -29,10 +28,9 @@ button, input, select {
 }
 
 #rankings {
-    margin: 2rem auto;
+    margin: 2rem;
     text-align: center; 
     height: 55rem;
-    width: 40rem;
     overflow-y: scroll;
 }
 
@@ -41,4 +39,14 @@ button, input, select {
     flex-wrap: flex;
     flex-direction: row;
     justify-content: space-evenly;
+}
+
+.subSection1 {
+    width: 60%;
+    border: black solid 1rem;
+}
+
+.subSection2 {
+    width: 20%;
+    border: black solid 1rem;
 }

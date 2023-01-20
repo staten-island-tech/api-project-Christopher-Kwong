@@ -4,8 +4,11 @@ let data = await (await fetch(URL)).json();
 
 const DOM = {
   output: document.querySelector("#output"),
+  rankings: document.querySelector("#rankings"),
   dropDownBase: document.querySelector(".dropDownBase"),
   dropDownConverted: document.querySelector(".dropDownConverted"),
+  leastValued: document.querySelector(".leastValued"),
+  mostValued: document.querySelector(".mostValued"),
 };
 
 async function createDropDown(arrayElement, ID) {
@@ -60,24 +63,14 @@ document.querySelector("#form").addEventListener("submit", (event) => {
 });
 
 let entries = Object.entries(data.rates);
-let values = Object.values(data.rates);
 
-/* entries.forEach((element) => console.log(`${element[0]}: ${element[1]}`)); */
+function sortingValues() {
+  for (let count = 0; count < 25; count++) {
+    entries.sort((a, b) => a[1] - b[1]);
+    DOM.rankings.insertAdjacentHTML("beforeend", `<p>${entries[count][0]}</p>`);
+  }
+}
 
-/* entries.forEach((element) => console.log(`${element[0]}: ${element[1]}`)); */
-/*   .sort((a, b) => a - b); */
-
-/* entries
-  .sort((a, b) => a[1] - b[1])
-  .forEach((element) => console.log(`${element[0]}: ${element[1]}`)); */
-
-entries
-  .sort((a, b) => a[1] - b[1])
-  .forEach((element) =>
-    document
-      .getElementById("rankings")
-      .insertAdjacentHTML("beforeend", `<p>${element[0]}</p>`)
-  );
-
-testing();
-/* console.log(`${dataValues.sort((a, b) => a - b)}`); */
+DOM.leastValued.addEventListener("click", function () {
+  sortingValues();
+});

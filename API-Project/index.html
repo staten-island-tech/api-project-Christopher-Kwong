@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="bigBox">
-      <div>
+      <div class="subSection1">
       <form id="form">
         <div id="interactions">
           <input class="textInput" type="text" placeholder="Amount" required>
@@ -22,12 +22,14 @@
         </div>
       </form>
       <div id="outputBox">
-        <p>History Log<strong>
+        <p>History Log</p>
         <div id="output"></div>
       </div>
     </div>
-    <div id="rankings">
-      Most Valued Currency By Single Bill
+    <div id="rankings" class="subSection2">
+      <h2>Rankings</h2>
+      <button class="leastValued" type="click">Least Valued</button>
+      <button class="mostValued" type="click">Highest Valued</button>
     </div>
     </div>
     <script type="module" src="/main.js"></script>
