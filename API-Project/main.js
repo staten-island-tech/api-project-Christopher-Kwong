@@ -64,35 +64,21 @@ document.querySelector("#form").addEventListener("submit", (event) => {
 
 let entries = Object.entries(data.rates);
 
-function sortingValues(compareFunction) {
-  DOM.outputRankings.textContent = "";
+function sortingValues(HTMLArea, arrayInput, compareFunction) {
+  HTMLArea.textContent = "";
   for (let count = 0; count < 25; count++) {
-    entries.sort(compareFunction);
+    arrayInput.sort(compareFunction);
     DOM.outputRankings.insertAdjacentHTML(
       "beforeend",
-      `<p>${[count + 1]}: ${entries[count][0]}</p>`
+      `<p>${[count + 1]}. ${entries[count][0]}</p>`
     );
   }
 }
 
 DOM.leastValued.addEventListener("click", function () {
-  sortingValues((a, b) => b[1] - a[1]);
+  sortingValues(DOM.outputRankings, entries, (a, b) => b[1] - a[1]);
 });
 
 DOM.mostValued.addEventListener("click", function () {
-  sortingValues((a, b) => a[1] - b[1]);
+  sortingValues(DOM.outputRankings, entries, (a, b) => a[1] - b[1]);
 });
-
-/* function sortingValues() {
-  for (let count = 0; count < 25; count++) {
-    entries.sort((a, b) => a[1] - b[1]);
-    DOM.rankings.insertAdjacentHTML(
-      "beforeend",
-      `<p>${[count + 1]}: ${entries[count][0]}</p>`
-    );
-  }
-}
-
-DOM.leastValued.addEventListener("click", function () {
-  sortingValues();
-}); */
