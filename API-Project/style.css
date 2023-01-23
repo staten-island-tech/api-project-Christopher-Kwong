@@ -3,9 +3,9 @@
 @import url('https://fonts.cdnfonts.com/css/crevice-stencil');
 /* font-family: 'Crevice Stencil', sans-serif; */
 
-/* -*{
+*{
     border: black solid 0.2rem;
-} */
+} 
 
 #interactions {
     text-align: center;
@@ -13,7 +13,6 @@
 
 button, input, select {
     font-size: 1rem;
-    margin: 2rem 0.2rem;
 }
 
 #outputBox {
@@ -28,7 +27,6 @@ button, input, select {
     font-size: 1rem;
     font-family: 'Crevice Stencil';
     overflow-y: scroll;
-    padding: 2rem;
 }
 
 .bigBox {
