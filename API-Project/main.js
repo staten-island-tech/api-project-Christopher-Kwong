@@ -1,60 +1,84 @@
 const URL = "https://api.exchangerate.host/latest";
 
 const DOM = {
-  textInput: document.querySelector(".textInput").value,
-  dropDownBase: document.querySelector(".dropDownBase").value,
-  dropDownConverted: document.querySelector(".dropDownConverted").value,
+  output: document.querySelector("#output"),
+  outputRankings: document.querySelector(".outputRankings"),
+  dropDownBase: document.querySelector(".dropDownBase"),
+  dropDownConverted: document.querySelector(".dropDownConverted"),
+  leastValued: document.querySelector(".leastValued"),
+  mostValued: document.querySelector(".mostValued"),
 };
 
-async function createDropDown(URL, ID) {
-  let data = await (await fetch(URL)).json();
-  Object.keys(data.rates).forEach((element) =>
-    document
-      .querySelector(ID)
-      .insertAdjacentHTML(
-        "beforeend",
-        `<option class="${element}">${element}</option>`
-      )
+let data = await (await fetch(URL)).json();
+
+async function createDropDown(arrayElement, ID) {
+  Object.keys(arrayElement).forEach((element) =>
+    ID.insertAdjacentHTML(
+      "beforeend",
+      `<option class="${element}">${element}</option>`
+    )
   );
 }
 
-createDropDown(URL, ".dropDownBase");
-createDropDown(URL, ".dropDownConverted");
+createDropDown(data.rates, DOM.dropDownBase);
+createDropDown(data.rates, DOM.dropDownConverted);
 
-async function getData(URL, input1, type) {
-  let data = await (await fetch(URL)).json();
-  let baseRate = document.querySelector(".dropDownBase").value;
-  document
-    .getElementById("output")
-    .insertAdjacentHTML(
-      "beforeend",
-      `<p>${input1} ${baseRate} = ${Number.parseFloat(
-        (input1 / data.rates[baseRate]) * data.rates[type]
-      ).toFixed(2)} ${type}</p>`
-    );
+async function getData(
+  HTML,
+  arrayElement,
+  inputValue,
+  baseCurrency,
+  toBeConverted
+) {
+  HTML.insertAdjacentHTML(
+    "beforeend",
+    `<h2 class="log">${inputValue} ${baseCurrency} = ${Number.parseFloat(
+      (inputValue / arrayElement[baseCurrency]) * arrayElement[toBeConverted]
+    ).toFixed(2)} ${toBeConverted}</h2>`
+  );
 }
 
-function Clear(first, second, third) {
-  first = "";
-  second = "Base Currency";
-  third = "Converted Currency";
+function Clear(firstString, secondString, thirdString) {
+  document.querySelector(".textInput").value = firstString;
+  document.querySelector(".dropDownConverted").value = secondString;
+  document.querySelector(".dropDownBase").value = thirdString;
 }
 
-document.getElementById("form").addEventListener("submit", (event) => {
+document.querySelector("#form").addEventListener("submit", (event) => {
   event.preventDefault();
-  let test = document.querySelector(".textInput").value;
-  let secondTest = document.querySelector(".dropDownConverted").value;
-  if (secondTest == "Converted Currency") {
+  let inputValue = document.querySelector(".textInput").value;
+  let toBeConverted = document.querySelector(".dropDownConverted").value;
+  let baseCurrency = document.querySelector(".dropDownBase").value;
+  if (Number.isNaN(inputValue / 1)) {
+    alert("Non-number Amount Entered");
+  } else if (
+    baseCurrency == "Base Currency" ||
+    toBeConverted == "Converted Currency"
+  ) {
     alert("Requires Currency Type");
   } else {
-    getData(URL, test, secondTest);
-    Clear(DOM.textInput, DOM.dropDownBase, DOM.dropDownConverted);
+    getData(DOM.output, data.rates, inputValue, baseCurrency, toBeConverted);
+    Clear("", "Converted Currency", "Base Currency");
   }
 });
 
-/*   console.log(Object.entries(data.rates));
-  Object.entries(data.rates).forEach(([currencycode, conversion]) => {
-    document
-      .getElementById("app")
-      .insertAdjacentHTML("beforeend", `<p>${currencycode}: ${conversion}</p>`);
-  });  */
+let entries = Object.entries(data.rates);
+
+function sortingValues(HTMLArea, arrayInput, compareFunction) {
+  HTMLArea.textContent = "";
+  for (let count = 0; count < 25; count++) {
+    arrayInput.sort(compareFunction);
+    DOM.outputRankings.insertAdjacentHTML(
+      "beforeend",
+      `<p>${[count + 1]}. ${entries[count][0]}</p>`
+    );
+  }
+}
+
+DOM.leastValued.addEventListener("click", function () {
+  sortingValues(DOM.outputRankings, entries, (a, b) => b[1] - a[1]);
+});
+
+DOM.mostValued.addEventListener("click", function () {
+  sortingValues(DOM.outputRankings, entries, (a, b) => a[1] - b[1]);
+});

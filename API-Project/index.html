@@ -2,22 +2,37 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css">
     <title>Vite App</title>
   </head>
   <body>
-    <form id="form">
-      <input class="textInput" type="text" placeholder="Amount" required>
-      <select class="dropDownBase">
-        <option class="defaultOption">Base Currency</option>
-      </select>
-      <select class="dropDownConverted">
-        <option class="defaultOption">Converted Currency</option>
-      </select>
-      <button id="valueButton" type="submit">Click</button>
-    </form>
-    <div id="output"></div>
+    <div class="bigBox">
+      <div class="subSection1">
+      <form id="form">
+        <div id="interactions">
+          <input class="textInput" type="text" placeholder="Amount" required>
+          <select class="dropDownBase">
+            <option class="defaultOption">Base Currency</option>
+          </select>
+          <select class="dropDownConverted">
+            <option class="defaultOption">Converted Currency</option>
+          </select>
+          <button id="valueButton" type="submit">Click</button>
+        </div>
+      </form>
+      <div id="outputBox">
+        <p>History Log</p>
+        <div id="output"></div>
+      </div>
+    </div>
+    <div id="rankings" class="subSection2">
+      <h1 class="rankingsText">Rankings</h1>
+      <button class="leastValued" type="click">Least Valued</button>
+      <button class="mostValued" type="click">Highest Valued</button>
+      <h3 class="outputRankings"></h3>
+    </div>
+    </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
