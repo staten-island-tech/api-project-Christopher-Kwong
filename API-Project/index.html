@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css">
-    <title>Vite App</title>
+    <title>Currency Converter</title>
   </head>
   <body>
+    <h1>Currency Converter</h1>
     <div class="bigBox">
       <div class="subSection1">
       <form id="form">
@@ -18,16 +19,17 @@
           <select class="dropDownConverted">
             <option class="defaultOption">Converted Currency</option>
           </select>
-          <button id="valueButton" type="submit">Click</button>
+          <button id="valueButton" type="submit">Convert</button>
+          <button class="clearButton" type="click">Clear</button>
         </div>
       </form>
       <div id="outputBox">
-        <p>History Log</p>
+        <p>Conversion</p>
         <div id="output"></div>
       </div>
     </div>
     <div id="rankings" class="subSection2">
-      <h1 class="rankingsText">Rankings</h1>
+      <h2 class="rankingsText">Rankings</h2>
       <button class="leastValued" type="click">Least Valued</button>
       <button class="mostValued" type="click">Highest Valued</button>
       <h3 class="outputRankings"></h3>

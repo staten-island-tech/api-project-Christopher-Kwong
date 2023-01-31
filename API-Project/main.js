@@ -1,10 +1,12 @@
 const URL = "https://api.exchangerate.host/latest";
 
 const DOM = {
+  form: document.querySelector("#form"),
   output: document.querySelector("#output"),
   outputRankings: document.querySelector(".outputRankings"),
   dropDownBase: document.querySelector(".dropDownBase"),
   dropDownConverted: document.querySelector(".dropDownConverted"),
+  clearButton: document.querySelector(".clearButton"),
   leastValued: document.querySelector(".leastValued"),
   mostValued: document.querySelector(".mostValued"),
 };
@@ -34,7 +36,7 @@ async function getData(
     "beforeend",
     `<h2 class="log">${inputValue} ${baseCurrency} = ${Number.parseFloat(
       (inputValue / arrayElement[baseCurrency]) * arrayElement[toBeConverted]
-    ).toFixed(2)} ${toBeConverted}</h2>`
+    )} ${toBeConverted}</h2>`
   );
 }
 
@@ -44,7 +46,7 @@ function Clear(firstString, secondString, thirdString) {
   document.querySelector(".dropDownBase").value = thirdString;
 }
 
-document.querySelector("#form").addEventListener("submit", (event) => {
+DOM.form.addEventListener("submit", (event) => {
   event.preventDefault();
   let inputValue = document.querySelector(".textInput").value;
   let toBeConverted = document.querySelector(".dropDownConverted").value;
@@ -64,6 +66,13 @@ document.querySelector("#form").addEventListener("submit", (event) => {
 
 let entries = Object.entries(data.rates);
 
+entries.forEach((element) => {
+  if (element[0] == "USD") {
+  } else {
+    getData(DOM.output, data.rates, 1, "USD", element[0]);
+  }
+});
+
 function sortingValues(HTMLArea, arrayInput, compareFunction) {
   HTMLArea.textContent = "";
   for (let count = 0; count < 25; count++) {
@@ -75,6 +84,10 @@ function sortingValues(HTMLArea, arrayInput, compareFunction) {
   }
 }
 
+DOM.clearButton.addEventListener("click", function () {
+  DOM.output.textContent = "";
+});
+
 DOM.leastValued.addEventListener("click", function () {
   sortingValues(DOM.outputRankings, entries, (a, b) => b[1] - a[1]);
 });
@@ -82,3 +95,5 @@ DOM.leastValued.addEventListener("click", function () {
 DOM.mostValued.addEventListener("click", function () {
   sortingValues(DOM.outputRankings, entries, (a, b) => a[1] - b[1]);
 });
+
+sortingValues(DOM.outputRankings, entries, (a, b) => b[1] - a[1]);

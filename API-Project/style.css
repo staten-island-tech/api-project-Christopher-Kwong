@@ -3,12 +3,9 @@
 @import url('https://fonts.cdnfonts.com/css/crevice-stencil');
 /* font-family: 'Crevice Stencil', sans-serif; */
 
-*{
-    border: black solid 0.2rem;
-} 
-
 #interactions {
     text-align: center;
+    margin-top: 2rem;
 }   
 
 button, input, select {
@@ -17,7 +14,6 @@ button, input, select {
 
 #outputBox {
     text-align: center;
-    border: black solid 0.2rem;
     font-size: 2rem;
     margin: 0rem 2rem 2rem 2rem;
     font-family: 'Cash Currency', sans-serif;                                                
@@ -26,7 +22,9 @@ button, input, select {
 #output {
     font-size: 1rem;
     font-family: 'Crevice Stencil';
+    border: black solid 0.2rem;
     overflow-y: scroll;
+    height: 40rem;
 }
 
 .bigBox {
@@ -39,15 +37,25 @@ button, input, select {
 .subSection1 {
     width: 60%;
     height: 55rem;
-    margin: 2rem 0rem;
+    margin: 0rem 0rem 2rem 0rem;
     border: black solid 0.2rem;
 }
 
 .subSection2 {
     width: 20%;
     height: 55rem;
-    margin: 2rem 0rem;
+    margin: 0rem 0rem 2rem 0rem;
     overflow-y: scroll;
     text-align: center; 
     border: black solid 0.2rem;
+}
+
+h1 {
+    text-align: center;
+    font-size: 4rem;
+    margin: 2rem;
+}
+
+h2 {
+    font-size: 2rem;
 }
