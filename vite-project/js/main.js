@@ -1,3 +1,4 @@
+import "../css/style.css";
 import { DOM } from "./dom";
 import { displayCreation } from "./display";
 import { sortingValues } from "./display";
