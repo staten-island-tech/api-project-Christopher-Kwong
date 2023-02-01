@@ -37,17 +37,48 @@ const clear = {
 
 export { clear };
 
-const sortingValues = {
-  display: function (HTMLArea, arrayInput, compareFunction) {
-    HTMLArea.textContent = "";
-    for (let count = 0; count < 25; count++) {
-      arrayInput.sort(compareFunction);
-      HTMLArea.insertAdjacentHTML(
-        "beforeend",
-        `<h3>${[count + 1]}. ${arrayInput[count][0]}</h3>`
-      );
-    }
+const formSubmit = {
+  execute: function (DOM, inputFunction, HTMLArea, subArray, inputFunction2) {
+    DOM.addEventListener("submit", (event) => {
+      event.preventDefault();
+      let inputValue = document.querySelector(".textInput").value;
+      let toBeConverted = document.querySelector(".dropDownConverted").value;
+      let baseCurrency = document.querySelector(".dropDownBase").value;
+      if (Number.isNaN(inputValue / 1)) {
+        alert("Non-number Amount Entered");
+      } else if (
+        baseCurrency == "Base Currency" ||
+        toBeConverted == "Converted Currency"
+      ) {
+        alert("Requires Currency Type");
+      } else {
+        inputFunction(
+          HTMLArea,
+          subArray,
+          inputValue,
+          baseCurrency,
+          toBeConverted
+        );
+        inputFunction2("", "Converted Currency", "Base Currency");
+      }
+    });
   },
 };
 
-export { sortingValues };
+export { formSubmit };
+
+const ordering = {
+  execute: function (
+    DOM,
+    inputFunction,
+    HTMLArea,
+    inputArray,
+    compareFunction
+  ) {
+    DOM.addEventListener("click", function () {
+      inputFunction(HTMLArea, inputArray, compareFunction);
+    });
+  },
+};
+
+export { ordering };

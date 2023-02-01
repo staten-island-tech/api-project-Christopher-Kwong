@@ -16,10 +16,25 @@ const arrayDisplay = {
     arrayInput.forEach((element) => {
       if (element[0] == "USD") {
       } else {
-        inputFunction.execute(HTMLArea, subArray, 1, "USD", element[0]);
+        inputFunction(HTMLArea, subArray, 1, "USD", element[0]);
       }
     });
   },
 };
 
 export { arrayDisplay };
+
+const sortingValues = {
+  display: function (HTMLArea, arrayInput, compareFunction) {
+    HTMLArea.textContent = "";
+    for (let count = 0; count < 25; count++) {
+      arrayInput.sort(compareFunction);
+      HTMLArea.insertAdjacentHTML(
+        "beforeend",
+        `<h3>${[count + 1]}. ${arrayInput[count][0]}</h3>`
+      );
+    }
+  },
+};
+
+export { sortingValues };
