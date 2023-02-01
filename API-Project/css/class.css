@@ -1,16 +1,7 @@
-@import url('https://fonts.cdnfonts.com/css/cash-currency');
-/* font-family: 'Cash Currency', sans-serif; */
-@import url('https://fonts.cdnfonts.com/css/crevice-stencil');
-/* font-family: 'Crevice Stencil', sans-serif; */
-
 #interactions {
     text-align: center;
     margin-top: 2rem;
 }   
-
-button, input, select {
-    font-size: 1rem;
-}
 
 #outputBox {
     text-align: center;
@@ -48,14 +39,4 @@ button, input, select {
     overflow-y: scroll;
     text-align: center; 
     border: black solid 0.2rem;
-}
-
-h1 {
-    text-align: center;
-    font-size: 4rem;
-    margin: 2rem;
-}
-
-h2 {
-    font-size: 2rem;
 }
