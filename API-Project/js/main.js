@@ -50,13 +50,3 @@ ordering.execute(
   entries,
   (a, b) => a[1] - b[1]
 );
-
-/* 
-DOM.leastValued.addEventListener("click", function () {
-  sortingValues.display(DOM.outputRankings, entries, (a, b) => b[1] - a[1]);
-});
-
-DOM.mostValued.addEventListener("click", function () {
-  sortingValues.display(DOM.outputRankings, entries, (a, b) => a[1] - b[1]);
-});
- */
