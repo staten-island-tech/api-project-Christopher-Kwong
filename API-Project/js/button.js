@@ -17,7 +17,7 @@ const conversionFunction = {
 
 export { conversionFunction };
 
-const Clear = {
+const reset = {
   execute: function (firstString, secondString, thirdString) {
     document.querySelector(".textInput").value = firstString;
     document.querySelector(".dropDownConverted").value = secondString;
@@ -25,7 +25,17 @@ const Clear = {
   },
 };
 
-export { Clear };
+export { reset };
+
+const clear = {
+  execute: function (button, HTMLArea) {
+    button.addEventListener("click", function () {
+      HTMLArea.textContent = "";
+    });
+  },
+};
+
+export { clear };
 
 const sortingValues = {
   display: function (HTMLArea, arrayInput, compareFunction) {

@@ -1,23 +1,25 @@
 import { DOM } from "./dom";
+import { displayCreation } from "./display";
+import { arrayDisplay } from "./display";
 import { conversionFunction } from "./button";
-import { Clear } from "./button";
+import { clear } from "./button";
+import { reset } from "./button";
 import { sortingValues } from "./button";
 
 const URL = "https://api.exchangerate.host/latest";
 
 let data = await (await fetch(URL)).json();
+let entries = Object.entries(data.rates);
 
-async function createDropDown(arrayElement, ID) {
-  Object.keys(arrayElement).forEach((element) =>
-    ID.insertAdjacentHTML(
-      "beforeend",
-      `<option class="${element}">${element}</option>`
-    )
-  );
-}
+displayCreation.createDropDown(data.rates, DOM.dropDownBase);
+displayCreation.createDropDown(data.rates, DOM.dropDownConverted);
 
-createDropDown(data.rates, DOM.dropDownBase);
-createDropDown(data.rates, DOM.dropDownConverted);
+arrayDisplay.execute(
+  conversionFunction.execute,
+  entries,
+  DOM.output,
+  data.rates
+);
 
 DOM.form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -39,22 +41,11 @@ DOM.form.addEventListener("submit", (event) => {
       baseCurrency,
       toBeConverted
     );
-    Clear.execute("", "Converted Currency", "Base Currency");
+    reset.execute("", "Converted Currency", "Base Currency");
   }
 });
 
-let entries = Object.entries(data.rates);
-
-entries.forEach((element) => {
-  if (element[0] == "USD") {
-  } else {
-    conversionFunction.execute(DOM.output, data.rates, 1, "USD", element[0]);
-  }
-});
-
-DOM.clearButton.addEventListener("click", function () {
-  DOM.output.textContent = "";
-});
+clear.execute(DOM.clearButton, DOM.output);
 
 DOM.leastValued.addEventListener("click", function () {
   sortingValues.display(DOM.outputRankings, entries, (a, b) => b[1] - a[1]);
