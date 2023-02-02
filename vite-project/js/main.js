@@ -13,8 +13,19 @@ const URL = "https://api.exchangerate.host/latest";
 
 // let dataFromURL = fetch(URL);
 // let data = dataFromURL.json();
-let data = fetch(URL).then((response) => response.json());
-let entries = Object.entries(data.rates);
+// let data = fetch(URL).then((response) => response.json());
+const asyncDataFn = async () => {
+  const response = await fetch(URL); // Generate the Response object
+  if (response.ok) {
+    const jsonValue = await response.json(); // Get JSON value from the response body
+    return Promise.resolve(jsonValue.rates);
+  } else {
+    return Promise.reject("ERROR!!!!");
+  }
+};
+// let entries = Object.entries(data.rates);
+let data = asyncDataFn();
+let entries = Object.entries(data);
 
 displayCreation.createDropDown(data.rates, DOM.dropDownBase);
 displayCreation.createDropDown(data.rates, DOM.dropDownConverted);
