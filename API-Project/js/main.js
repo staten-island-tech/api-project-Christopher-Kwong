@@ -10,46 +10,57 @@ import { ordering } from "./button";
 
 const URL = "https://api.exchangerate.host/latest";
 
-let data = await (await fetch(URL)).json();
-let entries = Object.entries(data.rates);
+// let data = await (await fetch(URL)).json();
 
-displayCreation.createDropDown(data.rates, DOM.dropDownBase);
-displayCreation.createDropDown(data.rates, DOM.dropDownConverted);
+fetch(URL)
+  .then((response) => response.json())
+  .then((data) => {
+    console.log("Success:", data);
+    //----------------------
+    let entries = Object.entries(data.rates);
 
-arrayDisplay.execute(
-  entries,
-  conversionFunction.execute,
-  DOM.output,
-  data.rates
-);
+    displayCreation.createDropDown(data.rates, DOM.dropDownBase);
+    displayCreation.createDropDown(data.rates, DOM.dropDownConverted);
 
-sortingValues.display(DOM.outputRankings, entries, (a, b) => b[1] - a[1]);
+    arrayDisplay.execute(
+      entries,
+      conversionFunction.execute,
+      DOM.output,
+      data.rates
+    );
 
-formSubmit.execute(
-  DOM.form,
-  conversionFunction.execute,
-  DOM.output,
-  data.rates,
-  reset.execute
-);
+    sortingValues.display(DOM.outputRankings, entries, (a, b) => b[1] - a[1]);
 
-clear.execute(DOM.clearButton, DOM.output);
+    formSubmit.execute(
+      DOM.form,
+      conversionFunction.execute,
+      DOM.output,
+      data.rates,
+      reset.execute
+    );
 
-ordering.execute(
-  DOM.leastValued,
-  sortingValues.display,
-  DOM.outputRankings,
-  entries,
-  (a, b) => b[1] - a[1]
-);
+    clear.execute(DOM.clearButton, DOM.output);
 
-ordering.execute(
-  DOM.mostValued,
-  sortingValues.display,
-  DOM.outputRankings,
-  entries,
-  (a, b) => a[1] - b[1]
-);
+    ordering.execute(
+      DOM.leastValued,
+      sortingValues.display,
+      DOM.outputRankings,
+      entries,
+      (a, b) => b[1] - a[1]
+    );
+
+    ordering.execute(
+      DOM.mostValued,
+      sortingValues.display,
+      DOM.outputRankings,
+      entries,
+      (a, b) => a[1] - b[1]
+    );
+    //----------------------
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
 
 /* 
 DOM.leastValued.addEventListener("click", function () {
