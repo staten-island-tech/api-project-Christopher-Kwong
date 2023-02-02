@@ -15,8 +15,6 @@ const URL = "https://api.exchangerate.host/latest";
 fetch(URL)
   .then((response) => response.json())
   .then((data) => {
-    console.log("Success:", data);
-    //----------------------
     let entries = Object.entries(data.rates);
 
     displayCreation.createDropDown(data.rates, DOM.dropDownBase);
@@ -56,18 +54,7 @@ fetch(URL)
       entries,
       (a, b) => a[1] - b[1]
     );
-    //----------------------
   })
   .catch((error) => {
     console.error("Error:", error);
   });
-
-/* 
-DOM.leastValued.addEventListener("click", function () {
-  sortingValues.display(DOM.outputRankings, entries, (a, b) => b[1] - a[1]);
-});
-
-DOM.mostValued.addEventListener("click", function () {
-  sortingValues.display(DOM.outputRankings, entries, (a, b) => a[1] - b[1]);
-});
- */
