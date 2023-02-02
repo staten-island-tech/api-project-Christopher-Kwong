@@ -10,7 +10,9 @@ import { ordering } from "./button";
 
 const URL = "https://api.exchangerate.host/latest";
 
-let data = await (await fetch(URL)).json();
+// let data = await (await fetch(URL)).json();
+let data = fetch(URL).then(response.json());
+console.log(data.rates);
 let entries = Object.entries(data.rates);
 
 displayCreation.createDropDown(data.rates, DOM.dropDownBase);
