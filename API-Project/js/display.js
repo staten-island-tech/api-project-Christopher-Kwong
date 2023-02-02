@@ -12,7 +12,7 @@ const displayCreation = {
 export { displayCreation };
 
 const arrayDisplay = {
-  execute: async function (arrayInput, inputFunction, HTMLArea, subArray) {
+  execute: function (arrayInput, inputFunction, HTMLArea, subArray) {
     arrayInput.forEach((element) => {
       if (element[0] == "USD") {
       } else {
@@ -25,7 +25,7 @@ const arrayDisplay = {
 export { arrayDisplay };
 
 const sortingValues = {
-  display: async function (HTMLArea, arrayInput, compareFunction) {
+  display: function (HTMLArea, arrayInput, compareFunction) {
     HTMLArea.textContent = "";
     for (let count = 0; count < 25; count++) {
       arrayInput.sort(compareFunction);

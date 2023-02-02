@@ -18,7 +18,7 @@ const conversionFunction = {
 export { conversionFunction };
 
 const reset = {
-  execute: async function (firstString, secondString, thirdString) {
+  execute: function (firstString, secondString, thirdString) {
     document.querySelector(".textInput").value = firstString;
     document.querySelector(".dropDownConverted").value = secondString;
     document.querySelector(".dropDownBase").value = thirdString;
@@ -28,7 +28,7 @@ const reset = {
 export { reset };
 
 const clear = {
-  execute: async function (button, HTMLArea) {
+  execute: function (button, HTMLArea) {
     button.addEventListener("click", function () {
       HTMLArea.textContent = "";
     });
@@ -38,13 +38,7 @@ const clear = {
 export { clear };
 
 const formSubmit = {
-  execute: async function (
-    DOM,
-    inputFunction,
-    HTMLArea,
-    subArray,
-    inputFunction2
-  ) {
+  execute: function (DOM, inputFunction, HTMLArea, subArray, inputFunction2) {
     DOM.addEventListener("submit", (event) => {
       event.preventDefault();
       let inputValue = document.querySelector(".textInput").value;
@@ -74,7 +68,7 @@ const formSubmit = {
 export { formSubmit };
 
 const ordering = {
-  execute: async function (
+  execute: function (
     DOM,
     inputFunction,
     HTMLArea,
