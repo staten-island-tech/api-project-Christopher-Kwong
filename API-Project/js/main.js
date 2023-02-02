@@ -1,4 +1,3 @@
-import "../css/style.css";
 import { DOM } from "./dom";
 import { displayCreation } from "./display";
 import { sortingValues } from "./display";
@@ -11,96 +10,51 @@ import { ordering } from "./button";
 
 const URL = "https://api.exchangerate.host/latest";
 
-let dataFromURL = fetch(URL);
-let data = dataFromURL.json();
-// let data = fetch(URL).then((response) => response.json());
-// const asyncDataFn = async () => {
-//   const response = await fetch(URL); // Generate the Response object
-//   if (response.ok) {
-//     const data = await response.json(); // Get JSON value from the response body
-//     let entries = Object.entries(data);
+// let data = await (await fetch(URL)).json();
 
-//     displayCreation.createDropDown(data.rates, DOM.dropDownBase);
-//     displayCreation.createDropDown(data.rates, DOM.dropDownConverted);
+fetch(URL)
+  .then((response) => response.json())
+  .then((data) => {
+    let entries = Object.entries(data.rates);
 
-//     arrayDisplay.execute(
-//       entries,
-//       conversionFunction.execute,
-//       DOM.output,
-//       data.rates
-//     );
+    displayCreation.createDropDown(data.rates, DOM.dropDownBase);
+    displayCreation.createDropDown(data.rates, DOM.dropDownConverted);
 
-//     sortingValues.display(DOM.outputRankings, entries, (a, b) => b[1] - a[1]);
+    arrayDisplay.execute(
+      entries,
+      conversionFunction.execute,
+      DOM.output,
+      data.rates
+    );
 
-//     formSubmit.execute(
-//       DOM.form,
-//       conversionFunction.execute,
-//       DOM.output,
-//       data.rates,
-//       reset.execute
-//     );
+    sortingValues.display(DOM.outputRankings, entries, (a, b) => b[1] - a[1]);
 
-//     clear.execute(DOM.clearButton, DOM.output);
+    formSubmit.execute(
+      DOM.form,
+      conversionFunction.execute,
+      DOM.output,
+      data.rates,
+      reset.execute
+    );
 
-//     ordering.execute(
-//       DOM.leastValued,
-//       sortingValues.display,
-//       DOM.outputRankings,
-//       entries,
-//       (a, b) => b[1] - a[1]
-//     );
+    clear.execute(DOM.clearButton, DOM.output);
 
-//     ordering.execute(
-//       DOM.mostValued,
-//       sortingValues.display,
-//       DOM.outputRankings,
-//       entries,
-//       (a, b) => a[1] - b[1]
-//     );
+    ordering.execute(
+      DOM.leastValued,
+      sortingValues.display,
+      DOM.outputRankings,
+      entries,
+      (a, b) => b[1] - a[1]
+    );
 
-//     return Promise.resolve("Good");
-//   } else {
-//     return Promise.reject("ERROR!!!!");
-//   }
-// };
-let entries = Object.entries(data.rates);
-// let data = asyncDataFn();
-// let entries = Object.entries(data);
-
-displayCreation.createDropDown(data.rates, DOM.dropDownBase);
-displayCreation.createDropDown(data.rates, DOM.dropDownConverted);
-
-arrayDisplay.execute(
-  entries,
-  conversionFunction.execute,
-  DOM.output,
-  data.rates
-);
-
-sortingValues.display(DOM.outputRankings, entries, (a, b) => b[1] - a[1]);
-
-formSubmit.execute(
-  DOM.form,
-  conversionFunction.execute,
-  DOM.output,
-  data.rates,
-  reset.execute
-);
-
-clear.execute(DOM.clearButton, DOM.output);
-
-ordering.execute(
-  DOM.leastValued,
-  sortingValues.display,
-  DOM.outputRankings,
-  entries,
-  (a, b) => b[1] - a[1]
-);
-
-ordering.execute(
-  DOM.mostValued,
-  sortingValues.display,
-  DOM.outputRankings,
-  entries,
-  (a, b) => a[1] - b[1]
-);
+    ordering.execute(
+      DOM.mostValued,
+      sortingValues.display,
+      DOM.outputRankings,
+      entries,
+      (a, b) => a[1] - b[1]
+    );
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
