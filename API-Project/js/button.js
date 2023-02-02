@@ -1,5 +1,5 @@
 const conversionFunction = {
-  execute: async function (
+  execute: function (
     HTML,
     arrayElement,
     inputValue,

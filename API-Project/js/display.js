@@ -1,5 +1,5 @@
 const displayCreation = {
-  createDropDown: async function (arrayElement, ID) {
+  createDropDown: function (arrayElement, ID) {
     Object.keys(arrayElement).forEach((element) =>
       ID.insertAdjacentHTML(
         "beforeend",
