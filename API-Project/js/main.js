@@ -15,7 +15,7 @@ let data = fetch(URL).then(response.json());
 console.log(data.rates);
 let entries = Object.entries(data.rates);
 
-displayCreation.createDropDown(data.rates, DOM.dropDownBase);
+setTimeout(displayCreation.createDropDown(data.rates, DOM.dropDownBase), 5000);
 displayCreation.createDropDown(data.rates, DOM.dropDownConverted);
 
 arrayDisplay.execute(
