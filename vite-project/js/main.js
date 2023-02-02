@@ -11,7 +11,8 @@ import { ordering } from "./button";
 
 const URL = "https://api.exchangerate.host/latest";
 
-let data = await (await fetch(URL)).json();
+let dataFromURL = fetch(URL);
+let data = dataFromURL.json();
 let entries = Object.entries(data.rates);
 
 displayCreation.createDropDown(data.rates, DOM.dropDownBase);
